@@ -1,6 +1,6 @@
 <?php
 
-if($_SERVER['REQUEST_METHOD'] == "POST") {
+if($_SERVER['REQUEST_METHOD'] == "POST"){
     $user_name = $_POST["user_name"];
     $pwd = $_POST["pwd"];
     $email = $_POST["email"];
@@ -10,14 +10,14 @@ if($_SERVER['REQUEST_METHOD'] == "POST") {
         $query = "INSERT INTO user_id (user_name, pwd, email) VALUES (?, ?, ?);";
         $stmt = $pdo->prepare($query);
         $stmt->execute([$user_name, $pwd, $email]);
-        $pdo = null;
         $stmt = null;
+        $pdo = null;
         header("Location: ../index.html");
         exit();
     } catch (PDOException $e) {
-        die("QUERY FAILED: ". $e->getMessage());
+        echo "SOME ERROR OCCURED".$e->getMEssage().".";
     }
 }else{
     header("Location: ../index.html");
-    die();
+    die("SOME ERROR OCCURED");
 }
