@@ -1,0 +1,640 @@
+/* ---------- full site CSS (updated slider) ---------- */
+
+* {
+    margin: 0;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+/*global*/
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
+li {
+    text-decoration: none;
+    list-style: none; 
+    display: inline-block;
+    padding-left: 16px;
+    padding-right: 16px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.current {
+    background-color: rgb(209, 208, 208);
+}
+
+.current_color {
+    color: black;
+}
+
+/*header*/
+
+.bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: rgb(209, 208, 208);
+    width: 100%;
+    border-bottom: gray 6px solid;
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-transform: uppercase;
+    padding-right: 36px;
+}
+
+.logo a img {
+    width: 32px;
+    padding: 12px;
+}
+
+.logo h1 {
+    font-size: 24px;
+}
+
+.logo h1 span {
+    color: gray;
+}
+
+.navigation {
+    text-transform: uppercase;
+    font-size: 0.76rem;
+}
+
+.menu:hover {
+    background-color: gray;
+    box-shadow: 0px 10px 20px rgb(6, 154, 240);
+}
+
+/* join-card (static background, optional: you can create a similar slideshow if needed) */
+
+.join-card {
+    background-image: url(../img/art-6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 2%;
+    margin-left: 39px;
+    margin-right: 39px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    text-align: center;
+    /* removed previous 'animation: slider' - use static background or convert to slideshow using same technique as below */
+}
+
+.join-card a {
+    color: rgb(184, 184, 184);
+    background-color: black;
+    font-size: 1.1rem;
+    padding: 1%;
+}
+
+.join-card a:hover {
+    font-size: 1.122111rem;
+    color: black;
+    background-color: rgb(209, 208, 208);
+}
+
+/* showcase (single-image banner) */
+
+.showcase {
+    background-image: url(../img/art-6.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 63vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.showcase h1 {
+    color: gray;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 3rem;
+    padding: 13.2% 0% 0.4% 0%;
+}
+.showcase span {
+    color: white;
+}
+
+.showcase p {
+    color: #fff;
+    font-size: 1.1rem;
+}
+
+/* search styles reused */
+
+.search {
+    padding: 10px 0px 140px 0px;
+}
+
+.search input {
+  height: 1.8rem;
+  width: 25rem;
+  border: none;
+  background-color: rgb(209, 208, 208);
+  font-size: 0.7rem;
+  border-radius: 2px;
+  box-shadow: 0 0 10px rgb(6, 154, 240);
+  padding-left: 10px;
+}
+
+.search button {
+    height: 1.8rem;
+    width: 6rem;
+    font-size: 0.9rem;
+    background-color: black;
+    color: rgb(209, 208, 208);
+    border: none;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+    cursor: pointer;
+}
+
+.search button:hover {
+    background-color: rgb(209, 208, 208);
+    color: black;
+}
+
+.search input:hover {
+    background-color: #ffff;
+}
+
+/* ---------------------------------------------------
+   SHOWCASE-TRENDING SLIDESHOW (pure CSS fade slideshow)
+   Requires HTML markup (see snippet below). You must
+   add slide divs inside .showcase-trending .slideshow
+   --------------------------------------------------- */
+
+.showcase-trending {
+    position: relative;
+    width: 100%;
+    height: 63vh; /* adjust as needed */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+}
+
+/* wrapper for slide layers */
+.showcase-trending .slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none; /* keep content clickable */
+}
+
+/* each .slide is full-cover layer */
+.showcase-trending .slide {
+    position: absolute;
+    inset: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    animation: fade 16s infinite linear;
+    will-change: opacity;
+}
+
+/* staggered delays so each slide appears in sequence */
+/* adjust delays to match animation duration and number of slides */
+.showcase-trending .slide.s1 { animation-delay: 0s; }
+.showcase-trending .slide.s2 { animation-delay: 4s; }
+.showcase-trending .slide.s3 { animation-delay: 8s; }
+.showcase-trending .slide.s4 { animation-delay: 12s; }
+
+/* ensure content sits above slideshow layers */
+.showcase-trending > *:not(.slideshow) {
+    position: relative;
+    z-index: 1;
+}
+
+/* fade keyframes:
+   - each slide fades in quickly, stays visible, then fades out.
+   - timing chosen for 4 slides in a 16s cycle (4s per slide).
+*/
+@keyframes fade {
+    0%    { opacity: 0; }
+    6%    { opacity: 1; }   /* quick fade-in */
+    24%   { opacity: 1; }   /* stay visible */
+    30%   { opacity: 0; }   /* fade-out */
+    100%  { opacity: 0; }
+}
+
+/* End slideshow section */
+
+/* paragraph part */
+
+.paragraph-1 {
+    margin-right: 390px;
+    margin-left: 390px;
+    margin-top: 70px;
+    margin-bottom: 60px;
+    font-size: 0.8rem;
+    color: gray;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+/* card */
+
+.card-1 {
+    margin-left: 39px;
+    margin-right: 39px;
+    margin-bottom: 60px;
+    background-image: url(../img/card-image.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    padding: 8% 0% 8% 4%;
+    color: rgb(54, 53, 53);
+}
+
+.card-1 h1 {
+    font-weight: bold;
+    color: black;
+}
+
+.card-1 p {
+    margin-right: 1200px;
+    padding-top: 1.2rem;
+    padding-bottom: 2.4rem;
+    font-weight: bold;
+}
+
+.card-1 a {
+    background-color: black;
+    padding: 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.card-1 a:hover {
+    font-size: 15px;
+    color: black;
+    background-color: rgb(90, 90, 90);
+}
+
+.card-2 {
+    margin-left: 39px;
+    margin-right: 39px;
+    margin-bottom: 60px;
+    background-image: url(../img/card22.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    padding: 8% 0% 8% 4%;
+    color: rgb(54, 53, 53);
+}
+
+.card-2 h1 {
+    font-weight: bold;
+    color: black;
+}
+
+.card-2 p {
+    margin-right: 1200px;
+    padding-top: 1.2rem;
+    padding-bottom: 2.4rem;
+    font-weight: bold;
+}
+
+.card-2 a {
+    background-color: black;
+    padding: 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.card-2 a:hover {
+    font-size: 15px;
+    color: black;
+    background-color: rgb(90, 90, 90);
+}
+
+/* art work */
+
+.art_work {
+    margin-left: 7%;
+    margin-right: 7%;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 40px;
+}
+
+.art_work h1 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: rgb(97, 97, 97);
+    padding-bottom: 40px;
+    padding-top: 40px;
+    font-weight: lighter;
+}
+
+.art_work img {
+    width: 420px;
+    padding: 1px;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+}
+
+.art_work img:hover {
+    box-shadow: 1px 2px 10px rgb(99, 111, 223);
+}
+
+/* grid container */
+
+.grid-container {
+    display: grid;
+    gap: 20px;
+}
+.item1 { grid-column-start: 1; grid-column-end: 1; grid-row-start: 1; grid-row-end: 1; }
+.item2 { grid-column-start: 2; grid-column-end: 2; grid-row-start: 1; grid-row-end: 1; }
+.item3 { grid-column-start: 3; grid-column-end: 3; grid-row-start: 1; grid-row-end: 1; }
+
+/* Join part */
+
+.join {
+    background-color: rgb(75, 75, 75);
+    margin-left: 38px;
+    margin-right: 38px;
+    margin-bottom: 40px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 50px 100px 50px 100px;
+    color: #fff;
+}
+
+.join p {
+    padding-bottom: 2.4rem;
+    margin-left: 200px;
+    margin-right: 200px;
+    line-height: 1.3rem;
+}
+
+.join a {
+    background-color: black;
+    padding: 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.join a:hover {
+    font-size: 15px;
+}
+
+/* join now form */
+
+.log_in_form {
+    background-image: url(../img/ary-2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    height: 89.6vh;
+}
+
+.log_in_form span {
+    color: rgb(46, 46, 46);
+}
+
+.log_in_form h1 {
+    color: gray;
+    font-family: sans-serif;
+    font-weight: lighter;
+    font-size: 3rem;
+    padding: 10% 0% 1% 0%;
+}
+
+.log_in_form p {
+    color: gray;
+    font-size: 1.1rem;
+}
+
+.log_in_form form {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 88px;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.log_in_form form input {
+    height: 2.1rem;
+    width: 18rem;
+    background-color: gray;
+    color: white;
+    font-size: 0.8rem;
+    padding-left: 10px;
+    border: none;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+}
+
+::placeholder {
+    color: #fff;
+    font-size: 0.8rem;
+}
+
+.log_in_form form button {
+    height: 2.1rem;
+    width: 18.6rem;
+    font-size: 0.9rem;
+    background-color: black;
+    color: rgb(209, 208, 208);
+    font-weight: bold;
+    border: none;
+    margin: 10px 0px 0px 0px;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+}
+
+.log_in_form form button:hover {
+    background-color:rgb(209, 208, 208);
+    color: black;
+}
+
+/* About section */
+.about {
+    margin-left: 39px;
+    margin-right: 39px;
+    margin-top: 49px;
+    margin-bottom: 49px;
+    display: flex;
+    flex-direction: row;
+}
+
+.about p span {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.about p {
+    padding: 30px;
+    background-color: rgb(41, 40, 40);
+    color: rgb(209, 208, 208);
+    line-height: 1.5rem;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+}
+
+.about img {
+    width: 800px;
+    height: 450px;
+    padding: 200px 0px 0px 40px;
+}
+
+.about p:hover {
+    background-color: black;
+}
+
+.Back_To_The_Top {
+    color: white;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(53, 51, 51);
+    padding: 1.5rem;
+    border-bottom: black 5px solid;
+}
+
+/* footer */
+
+footer {
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    background-color: gray;
+    width: 100%;
+    height: 60px;
+}
+
+footer p {
+    color: rgb(209, 208, 208);
+    font-size: 15px;
+    padding: 22.5px 0px 22.5px 0px;
+}
+
+/* pic */
+
+.picture {
+    margin-left: 39px;
+    margin-right: 39px;
+    margin-top: 49px;
+    margin-bottom: 49px;
+    display: flex;
+    flex-direction: row;
+}
+
+.picture p span {
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.picture p {
+    padding: 30px;
+    background-color: rgb(41, 40, 40);
+    color: rgb(209, 208, 208);
+    line-height: 2.5rem;
+    box-shadow: 0 0 10px rgb(6, 154, 240);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.picture img {
+    width: 40%;
+    height: 25%;
+    padding: 10% 2% 10% 15%;
+}
+
+/* responsive */
+
+@media(max-width: 768px) {
+
+    .bar {
+        flex-direction: column;
+    }
+    li {
+        padding-bottom: 10px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .search input {
+        width: 15rem;
+    }
+
+    .paragraph-1 {
+        margin: 40px;
+    }
+
+    .art_work img {
+        width: 128px;
+    }
+
+    .art_work {
+        margin-left: 4%;
+    }
+
+    .card-1 p {
+        display: none;
+    }
+
+    .card-2 p {
+        display: none;
+    }
+
+    .card-2 h1 {
+        display: none;
+    }
+
+    .card-1 h1 {
+        display: none;
+    }
+
+    .join {
+        padding: 40px 40px 40px 40px;
+    }
+
+    .about {
+        display: inline;
+    }
+    .about img {
+        width: 0px;
+        height: 0px;
+    }
+
+    /* slideshow height for small screens */
+    .showcase-trending {
+        height: 48vh;
+    }
+}
+
+/* ---------- end of CSS ---------- */

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./CSS/style.css">
+    <title>Art Gallery | Join Now</title>
+</head>
+<body>
+    <!--Navigation bar-->
+    <header class="bar">
+        <div class="logo">
+            <a href="index.html"><img src="./img/logo.png" alt="logo"></a><h1><span>Art</span> Gallery</h1>
+        </div>
+        <nav class="navigation">
+            <ul>
+                <li class="menu"><a href="index.html">Home</a></li>
+                <li class="menu"><a href="about.html">About</a></li>
+                <li class="menu"><a href="latest.html">Tranding</a></li>
+                <li class="menu"><a href="gallery.html">Gallery</a></li>
+                <li class="current"><a href="./project/register.php" class="current_color">Join Now</a></li>
+            </ul>
+        </nav>
+    </header>
+<!--Showcase area-->
+    <section class="log_in_form">
+        <h1>Art <span>Archive</span></h1>
+        <p>Join in Our Art community</p>
+        <form action="include/formhandler.inc.php" method="post">
+            <input required name="first_name", type="text" placeholder="first name">
+            <input required name="last_name" type="text" placeholder="last name">
+            <input required name="user_name" type="text" placeholder="user name">
+            <input required name="email" type="email" placeholder="enter your email id">
+            <input required name="password" type="password" placeholder="password">
+            <button value="submit"  type="submit">SIGN IN</button>
+        </form>
+
+    </section>
+</body>
+</html>
